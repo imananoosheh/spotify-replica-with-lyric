@@ -1,5 +1,6 @@
-# spotify-replica-with-lyric
+# spotify replica with lyrics showing
 
 ## App Demo
+...
 
-![demo video of the app](https://raw.githubusercontent.com/imananoosheh/spotify-replica-with-lyric/master/docs/app-preview.mp4){loop=""}
+![App Demo](https://raw.githubusercontent.com/imananoosheh/spotify-replica-with-lyric/master/docs/app-preview.gif)
