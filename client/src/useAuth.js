@@ -6,8 +6,6 @@ export default function useAuth(code) {
   const [refreshToken, setRefreshToken] = useState();
   const [expiresIn, setExpiresIn] = useState();
 
-  // console.log(refreshToken)
-
   useEffect(() => {
     axios
       .post("http://localhost:3001/login", { code })
@@ -17,7 +15,8 @@ export default function useAuth(code) {
         setExpiresIn(res.data.expiresIn);
         window.history.pushState({}, null, "/");
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         window.location = "/";
       });
   }, [code]);
@@ -29,14 +28,13 @@ export default function useAuth(code) {
         .post("http://localhost:3001/refresh", { refreshToken })
         .then((res) => {
           setAccessToken(res.data.accessToken);
-          // setRefreshToken(res.data.refreshToken)
           setExpiresIn(res.data.expiresIn);
         })
         .catch(() => {
-          // window.location = '/'
+          window.location = '/'
         });
-    }, (expiresIn - 60) * 1000);
-    return () => clearInterval(timeInterval)
+    }, (expiresIn - 120) * 1000);
+    return () => clearInterval(timeInterval);
   }, [refreshToken, expiresIn]);
 
   return accessToken;

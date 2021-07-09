@@ -12,8 +12,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post("/refresh", (req, res) => {
   const refreshToken = req.body.refreshToken;
-  console.log(refreshToken);
-
   const spotifyApi = new SpotifyWebApi({
     redirectUri: process.env.REDIRECT_URI,
     clientId: process.env.CLIENT_ID,
@@ -63,6 +61,11 @@ app.get("/lyrics", async (req, res) => {
     (await lyricsFinder(req.query.artist, req.query.track)) ||
     "No Lyrics found";
   res.json({ lyrics });
+});
+
+app.get("/client_id", (req, res) => {
+  let client_id = process.env.CLIENT_ID;
+  res.json({ client_id });
 });
 
 app.listen(3001);

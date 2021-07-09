@@ -12,8 +12,18 @@ export default function Dashboard({ code }) {
   const [searchResults, setSearchResults] = useState([]);
   const [playingTrack, setPlayingTrack] = useState()
   const [lyrics, setLyrics] = useState("")
+  const [clientId, setClientId] = useState("");
+axios
+  .get("http://localhost:3001/client_id")
+  .then((res) => {
+    setClientId(res.data.client_id);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
   const spotifyApi = new SpotifyWebApi({
-    clientId: "4853e5d8e9ba4c119bddea0635ad446c",
+    clientId: clientId,
   });
 
   function chooseTrack(track){
